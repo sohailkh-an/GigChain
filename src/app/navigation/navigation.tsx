@@ -26,38 +26,23 @@ export default function Navigation() {
                             type="text"
                             placeholder="Search for jobs"
                         />
-                        <button className={styles.searchButton}>Search</button>
-
-                    </div>
-
-                    <div className={styles.icons_container}>
-                        
-                      
-                        <Link href="/inbox" className={styles.inbox_icon}>
-                            Inbox
-                        </Link>
-                        
-                        <Link href="/notifications" className={styles.notification_icon}>
-                            Notifications
-                        </Link>
-
-                        <Link href="/help" className={styles.help_icon}>
-                            Help
-                        </Link>
-
-                        <Link href="/profile" className={styles.profile_icon}>
-                            Profile
-                        </Link>
+                        {/* <button className={styles.searchButton}>Search</button> */}
 
                     </div>
 
 
                     <div className={styles.navbar_right}>
                         <Link href="/register" className={styles.navbar_link}>
-                            Register
+                            Inbox
                         </Link>
                         <Link href="/signIn" className={styles.navbar_link}>
-                            Sign In
+                            Notifications
+                        </Link>
+                        <Link href="/signIn" className={styles.navbar_link}>
+                            Help
+                        </Link>
+                        <Link href="/signIn" className={styles.navbar_link}>
+                            Profile
                         </Link>
                     </div>
                 </div>

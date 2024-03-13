@@ -2,13 +2,11 @@
 import React from 'react';
 import Link from 'next/link';
 import styles from './page.module.scss';
-import Navigation from '../navigation/navigation';
 
 export default function HomePage() {
 
     return (
         <React.Fragment>
-            <Navigation />
             <div className={styles.home_wrapper}>
                 <div className={styles.parent_cont_left}>
                     <div className={styles.main_content_container}>
