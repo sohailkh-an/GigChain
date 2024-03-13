@@ -1,9 +1,9 @@
 import React from 'react';
 import styles from './navigation.module.css';
 import Link from 'next/link';
-import InboxIcon from '../../public/chat message.svg';
-import NotificationIcon from '../../public/notification.svg';
-import HelpIcon from '../../public/help.svg';
+// import InboxIcon from '../../public/chat message.svg';
+// import NotificationIcon from '../../public/notification.svg';
+// import HelpIcon from '../../public/help.svg';
 
 
 export default function Navigation() {
@@ -34,19 +34,19 @@ export default function Navigation() {
                         
                       
                         <Link href="/inbox" className={styles.inbox_icon}>
-                            <img src={InboxIcon} alt="inbox icon" />
+                            Inbox
                         </Link>
                         
                         <Link href="/notifications" className={styles.notification_icon}>
-                            <img src={NotificationIcon} alt="notification icon" />
+                            Notifications
                         </Link>
 
                         <Link href="/help" className={styles.help_icon}>
-                            <img src={HelpIcon} alt="help icon" />
+                            Help
                         </Link>
 
                         <Link href="/profile" className={styles.profile_icon}>
-                            <img src="/profile.svg" alt="profile icon" />
+                            Profile
                         </Link>
 
                     </div>
