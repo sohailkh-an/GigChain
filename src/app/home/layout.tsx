@@ -1,6 +1,6 @@
 import React from 'react';
-import NavBar from '../navigation/navigation';
-import Footer from '../footer/footer';
+import NavBar from '../../components/navigation/navigation';
+import Footer from '../../components/footer/footer';
 
 export default function Layout({
     children, // will be a page or nested layout

@@ -16,28 +16,28 @@ export default function Footer() {
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="/images/facebook.svg" alt="facebook" />
+                  {/* <img src="/images/facebook.svg" alt="facebook" /> */}
                 </a>
                 <a
                   href="https://www.instagram.com/gigchain"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="/images/instagram.svg" alt="instagram" />
+                  {/* <img src="/images/instagram.svg" alt="instagram" /> */}
                 </a>
                 <a
                   href="https://www.twitter.com/gigchain"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="/images/twitter.svg" alt="twitter" />
+                  {/* <img src="/images/twitter.svg" alt="twitter" /> */}
                 </a>
                 <a
                   href="https://www.linkedin.com/gigchain"
                   target="_blank"
                   rel="noreferrer"
                 >
-                  <img src="/images/linkedin.svg" alt="linkedin" />
+                  {/* <img src="/images/linkedin.svg" alt="linkedin" /> */}
                 </a>
               </div>
             </div>

@@ -2,13 +2,46 @@
 import React from "react";
 import styles from "./page.module.css";
 import Link from "next/link";
+import { useRouter } from "next/navigation";
+import { useState } from "react";
 
 export default function SignInPage() {
+  const router = useRouter();
+
+  const [email, setEmail] = useState("");
+  const [password, setPassword] = useState("");
+
+  const handleSignIn = async (event: React.FormEvent<HTMLFormElement>) => {
+    event.preventDefault();
+
+    const formData = {
+      email: email,
+      password: password,
+    };
+
+    const response = await fetch("/signIn/api", {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json",
+      },
+      body: JSON.stringify(formData),
+    });
+
+    if (response.ok) {
+      router.push("/home");
+    } else {
+      console.error("Failed to login user");
+    }
+  };
+
   return (
     <React.Fragment>
       <div className={styles.signIn_wrapper}>
         <div className={styles.parent_cont_left}>
-          <div className={styles.main_content_container}>
+          <form
+            onSubmit={handleSignIn}
+            className={styles.main_content_container}
+          >
             <h1 className={styles.h3}>GigChain</h1>
 
             <div>
@@ -22,11 +55,13 @@ export default function SignInPage() {
                 className={styles.input}
                 type="text"
                 placeholder="Email or Username"
+                onChange={(event) => setEmail(event.target.value)}
               />
               <input
                 className={styles.input}
                 type="password"
                 placeholder="Password"
+                onChange={(event) => setPassword(event.target.value)}
               />
             </div>
 
@@ -36,13 +71,15 @@ export default function SignInPage() {
                 <span className={styles.checkbox_label}>Remember Me</span>
               </label>
 
-              <a className={styles.forgetPassLink} href="/forgetPassword">Forgot password?</a>
+              <a className={styles.forgetPassLink} href="/forgetPassword">
+                Forgot password?
+              </a>
             </div>
 
             <div>
-              <Link href="/home">
-                <button className={styles.button_primary}>Login</button>
-              </Link>
+              <button type="submit" className={styles.button_primary}>
+                Login
+              </button>
             </div>
 
             <div className={styles.or_container}>
@@ -62,7 +99,7 @@ export default function SignInPage() {
                 Dont have a GigChain profile? Register
               </Link>
             </div>
-          </div>
+          </form>
         </div>
         <div className={styles.parent_cont_right}>
           <div>
