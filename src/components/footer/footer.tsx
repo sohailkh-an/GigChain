@@ -76,7 +76,7 @@ export default function Footer() {
               <Link href="/how-it-works">
                 Do Not Sell My Personal Information
               </Link>
-              <Link href="/how-it-works">Accessibility</Link>
+              {/* <Link href="/how-it-works">Accessibility</Link> */}
             </div>
           </div>
         </div>

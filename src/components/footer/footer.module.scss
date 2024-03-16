@@ -1,8 +1,8 @@
-@use "../../../styles/_base.scss" as base;
+@use "../../styles/base" as base;
 
 .main_footer{
     height:500px;
-    width:100vw;
+    // width:100vw;
     background-color: #866E96;
     display:flex;
     justify-content: center;
@@ -10,7 +10,8 @@
 
 
     .footer_content_container{
-        width:1266px;
+        width:1166px;
+        // max-width: 1500px;
         height:80%;
         background-color: base.$background;
         border-radius: 4px;
