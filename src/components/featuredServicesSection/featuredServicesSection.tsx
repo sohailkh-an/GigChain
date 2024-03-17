@@ -1,9 +1,39 @@
 import { useEffect, useState } from "react";
 import ServiceCard from "../serviceCard/serviceCard";
 // /api/services?featured=true&type=${serviceType}
-import styles from './styles/featuredServicesSectionStyles.module.scss'
+import styles from "./styles/featuredServicesSectionStyles.module.scss";
+import Slider from "react-slick";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
-function FeaturedServicesSection({ serviceType }: { serviceType: any }) {
+function FeaturedServicesSection({ serviceType }: { serviceType: string }) {
+  const sliderSettings = {
+    dots: false,
+    infinite: false,
+    speed: 1000,
+    slidesToShow: 2.6,
+    slidesToScroll: 1,
+
+    // responsive: [
+    //   {
+    //     breakpoint: 1024,
+    //     settings: {
+    //       slidesToShow: 2,
+    //       slidesToScroll: 2,
+    //       infinite: true,
+    //       dots: true,
+    //     },
+    //   },
+    //   {
+    //     breakpoint: 600,
+    //     settings: {
+    //       slidesToShow: 1,
+    //       slidesToScroll: 1,
+    //     },
+    //   },
+    // ],
+  };
+
   const [services, setServices] = useState([]);
 
   useEffect(() => {
@@ -19,17 +49,18 @@ function FeaturedServicesSection({ serviceType }: { serviceType: any }) {
     fetchFeaturedServices();
   }, []);
 
-return (
+  return (
     <section className={styles.featuredServices_main_container}>
-        <h2>Featured {serviceType}</h2>
-        <div className={styles.services_container}>
-            {services.map((service, index) => (
-                <ServiceCard key={index} service={service} />
-            ))}
-        </div>
-        {/* Add navigation or "See More" link as needed */}
+      <h2>Featured {serviceType}</h2>
+      <Slider {...sliderSettings}>
+        {services.map((service, index) => (
+          <div key={index}>
+            <ServiceCard service={service} />
+          </div>
+        ))}
+      </Slider>
     </section>
-);
+  );
 }
 
 export default FeaturedServicesSection;

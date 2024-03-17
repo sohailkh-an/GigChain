@@ -6,7 +6,11 @@
     gap: 30px;
   padding: 30px 50px;
   background-color: base.$background;
-  
+
+  .service_card_wrapper{
+    margin-right: 16px;
+  }
+
 
   .services_container {
     display: flex;
@@ -14,3 +18,10 @@
     gap: 30px;
   }
 }
+
+
+.slick-prev, .slick-next {
+  z-index: 1; /* Ensure arrows are above other elements */
+  
+}
+
