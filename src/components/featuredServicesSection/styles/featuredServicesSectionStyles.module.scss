@@ -1,39 +1,24 @@
 @use "../../../styles/base" as base;
 
-.slick-prev,
-.slick-next {
-  z-index: 25; /* Ensure arrows are above other elements */
-  top: 50%; /* Adjusts the arrow to be vertically centered to the slider */
-  transform: translateY(-50%); /* Centers the arrow with respect to its height */
 
-  
-
+.slick-prev:before,
+.slick-next:before {
+    color: red;
 }
-
-/* Adjust the left/right position to bring the arrows above the cards */
-.slick-prev {
-  left: 10px; /* Adjust as needed */
-}
-
-.slick-next {
-  right: 10px; /* Adjust as needed */
-}
-
 
 .featuredServices_main_container {
-    display: flex;
-    flex-direction: column;
-    gap: 30px;
+  display: flex;
+  flex-direction: column;
+  gap: 30px;
   padding-top: 30px;
   padding-left: 50px;
   padding-right: 50px;
   padding-bottom: 30px;
   background-color: base.$background;
 
-  .service_card_wrapper{
+  .service_card_wrapper {
     margin-right: 16px;
   }
-
 
   .services_container {
     display: flex;
@@ -41,5 +26,3 @@
     gap: 30px;
   }
 }
-
-

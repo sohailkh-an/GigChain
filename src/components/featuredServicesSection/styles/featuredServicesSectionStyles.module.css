@@ -1,17 +1,6 @@
-.slick-prev,
-.slick-next {
-  z-index: 25; /* Ensure arrows are above other elements */
-  top: 50%; /* Adjusts the arrow to be vertically centered to the slider */
-  transform: translateY(-50%); /* Centers the arrow with respect to its height */
-}
-
-/* Adjust the left/right position to bring the arrows above the cards */
-.slick-prev {
-  left: 10px; /* Adjust as needed */
-}
-
-.slick-next {
-  right: 10px; /* Adjust as needed */
+.slick-prev:before,
+.slick-next:before {
+  color: red;
 }
 
 .featuredServices_main_container {
@@ -20,7 +9,7 @@
   gap: 30px;
   padding-top: 30px;
   padding-left: 50px;
-  padding-right: 0px;
+  padding-right: 50px;
   padding-bottom: 30px;
   background-color: #EEF0FF;
 }
