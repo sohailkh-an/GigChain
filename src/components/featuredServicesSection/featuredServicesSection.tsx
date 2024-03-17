@@ -11,7 +11,7 @@ function FeaturedServicesSection({ serviceType }: { serviceType: string }) {
     dots: false,
     infinite: false,
     speed: 1000,
-    slidesToShow: 2.6,
+    slidesToShow: 2.8,
     slidesToScroll: 1,
 
     // responsive: [
