@@ -1,67 +1,45 @@
-import { NextRequest } from "next/server";
-import clientPromise from "../../utils/mongodb";
+// import { PrismaClient }  require('@prisma/client');
+import { PrismaClient } from '@prisma/client';
+import { NextResponse } from 'next/server';
 
-export async function POST(req, res) {
+const prisma = new PrismaClient();
+
+// This should be the default export for Next.js API routes
+export async function GET(req, res) {
+
+  await prisma.$connect();
+  if (req.method !== 'GET') {
+    // If not a POST request, send a 405 Method Not Allowed response
+    return res.status(405).json({ message: "Method Not Allowed. Try POST" });
+  }
+
   try {
-    const client = await clientPromise;
-    const db = client.db("GigChain"); // Replace 'yourDatabaseName' with the name of your database
 
-    //insert random user data to test the connection
-    // const newUser = await db.collection("Services").insertOne({
-    //   category: "Graphic Design",
-    //   thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+2.png",
-    //   serviceProvider: "Kamran Javaid",
-    //   rating: "4.8",
-    //   reviews: "478",
-    //   description: "Another guy offering graphic design services starting at $100 delivered in 3 days",
-    //   isFeatured: true,
+    // Create a new testUser
+    // await prisma.testUser.create({
+    //   data: {
+    //     name: "Sina Bathaie",
+    //     email: "sina.bathaie@vevo.com",
+    //     passwordHash: "thisissinapassword",
+    //   },
     // });
 
-    //insert another user random data
-    // const newUser2 = await db.collection("Services").insertOne({
-    //   category: "Graphic Design",
-    //   thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+76.png",
-    //   serviceProvider: "Mehdi Hassan",
-    //   rating: "5",
-    //   reviews: "3478",
-    //   description: "The only guy with professional graphic design services starting at $500 delivered in 3 weeks",
-    //   isFeatured: true,
-    // });
+    // Find the first testUser
+    const testUsers = await prisma.testUser.findMany();
 
-
-    const newUser3 = await db.collection("Services").insertOne({
-      category: "Graphic Design",
-      thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+1.png",
-      serviceProvider: "Talha Qamar",
-      rating: "4.2",
-      reviews: "574",
-      description: "Luxury graphic design services starting at $1000 delivered in 14 days",
-      isFeatured: true,
-    });
-
-    //fetch the user data
-
-    const data = await db.collection("Services")
-    .find({ isFeatured: true }) // Assuming there's a 'featured' field to filter by
-    .toArray();
-
-    if (data.length > 0) {
-      return new Response(JSON.stringify(data), {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+    // Check if data is not null instead of checking data.length
+    if (data) {
+      return NextResponse.json(data);
     } else {
-      return new Response("No data found", {
-        headers: {
-          "Content-Type": "application/json",
-        },
-      });
+      return NextResponse.json({ message: "No testUser found" });
     }
   } catch (error) {
-    console.error("Failed to connect to MongoDB", error);
-    res
-      .status(500)
-      .json({ message: "Failed to connect to MongoDB", error: error.message });
+    console.error("Failed to connect to MongoDB 22March", error);
+
+    // Send the error message in the response
+    return NextResponse.json({ message: "Failed to connect to MongoDB" });
+  } finally {
+    // Disconnect from Prisma
+    await prisma.$disconnect();
   }
 }

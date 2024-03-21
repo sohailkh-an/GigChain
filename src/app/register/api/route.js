@@ -1,40 +1,36 @@
-import { NextRequest, NextResponse } from "next/server";
+import { NextResponse } from "next/server";
 import clientPromise from "../../../utils/mongodb";
-// import { hashPassword } from '../../utils/auth';
+import User from "../../../models/user";
+import bcrypt from "bcrypt";
 
-export async function POST(request, response) {
+export async function POST(request) {
   try {
     const client = await clientPromise;
     const db = client.db("GigChain");
 
-    const reqBody = await request.json();
-    console.log(reqBody);
-    const { name, email, password } = reqBody;
+    const { name, email, password } = await request.json();
 
-    console.log(name);
-    console.log(email);
-    console.log(password);
+    const salt = await bcrypt.genSalt(10);
+    const passwordHash = await bcrypt.hash(password, salt);
 
-    //   const hashedPassword = await hashPassword(password);
-
-    const existingUser = await db.collection("Users").findOne({ email });
+    const existingUser = await db.collection("users").findOne({ email });
     if (existingUser) {
       return NextResponse.json(
-        { message: "User already exists" },
+        { message: "User with that email already exists" },
         { status: 409 }
       );
     }
 
-    await db.collection("Users").insertOne({
+    await db.collection("users").insertOne({
       name,
       email,
-      password,
+      passwordHash,
     });
 
     return NextResponse.json(
       {
         message:
-          "User registered successfully (Message coming from API endpoint",
+          "User registered successfully (Message coming from API endpoint)",
       },
       { status: 201 }
     );

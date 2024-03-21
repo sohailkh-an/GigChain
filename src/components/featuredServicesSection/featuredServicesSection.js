@@ -1,4 +1,4 @@
-import { useEffect, useState } from "react";
+import { useEffect, useState, Suspense } from "react";
 import ServiceCard from "../serviceCard/serviceCard";
 import Slider from "react-slick";
 import "slick-carousel/slick/slick.css";
@@ -28,7 +28,7 @@ import styles from "./styles/featuredServicesSectionStyles.module.scss";
 //   );
 // }
 
-function FeaturedServicesSection({ serviceType }: { serviceType: string }) {
+function FeaturedServicesSection({ serviceType }) {
   const sliderSettings = {
     dots: false,
     infinite: false,
@@ -58,11 +58,13 @@ function FeaturedServicesSection({ serviceType }: { serviceType: string }) {
     <section className={styles.featuredServices_main_container}>
       <h2>Featured {serviceType}</h2>
       <Slider {...sliderSettings}>
+        {/* <Suspense fallback={<div>Loading...</div>}> */}
         {services.map((service, index) => (
           <div key={index}>
             <ServiceCard service={service} />
           </div>
         ))}
+        {/* </Suspense> */}
       </Slider>
     </section>
   );

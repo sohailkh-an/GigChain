@@ -1,0 +1,102 @@
+// This is your Prisma schema file,
+// learn more about it in the docs: https://pris.ly/d/prisma-schema
+
+// Looking for ways to speed up your queries, or scale easily with your serverless or edge functions?
+// Try Prisma Accelerate: https://pris.ly/cli/accelerate-init
+
+generator client {
+  provider = "prisma-client-js"
+}
+
+datasource db {
+  provider = "mongodb"
+  url      = env("MONGODB_URI")
+}
+
+
+model TestUser {
+  id String @id @default(auto()) @map("_id") @db.ObjectId
+  name String
+  email String @unique
+  passwordHash String
+
+}
+
+model User {
+  id                 String    @id @default(auto()) @map("_id") @db.ObjectId
+  name               String
+  email              String    @unique
+  passwordHash       String
+  userType           UserType
+  profileDescription String?
+  skills             String[]
+  ratings            Float?
+  services           Service[]
+  orders             Order[]
+  reviewsGiven       Review[] @relation("ReviewsGiven")
+  reviewsReceived    Review[] @relation("ReviewsReceived")
+  messagesSent       Message[] @relation(name: "MessagesSent")
+  messagesReceived   Message[] @relation(name: "MessagesReceived")
+
+}
+
+model Service {
+  id           String   @id @default(auto()) @map("_id") @db.ObjectId
+  title        String
+  description  String
+  price        Float
+  deliveryTime Int 
+  categories   String[]
+  reviews      Review[]
+  freelancer   User     @relation(fields: [freelancerId], references: [id])
+  freelancerId String @db.ObjectId
+  Order        Order[]
+}
+
+model Order {
+  orderId      String      @id @default(auto()) @map("_id") @db.ObjectId
+  status       OrderStatus
+  orderDate    DateTime
+  deliveryDate DateTime?
+  service      Service     @relation(fields: [serviceId], references: [id])
+  serviceId    String @db.ObjectId
+  client       User        @relation(fields: [clientId], references: [id])
+  clientId     String @db.ObjectId
+  Review       Review[]
+}
+
+model Review {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  rating     Float
+  comment    String?
+  reviewDate DateTime
+  order      Order    @relation(fields: [orderId], references: [orderId]) // Corrected reference
+  orderId    String   @db.ObjectId
+  reviewer   User     @relation("ReviewsGiven", fields: [reviewerId], references: [id])
+  reviewerId String   @db.ObjectId
+  reviewee   User     @relation("ReviewsReceived", fields: [revieweeId], references: [id])
+  revieweeId String   @db.ObjectId
+  Service    Service? @relation(fields: [serviceId], references: [id])
+  serviceId  String?  @db.ObjectId
+}
+
+model Message {
+  id         String   @id @default(auto()) @map("_id") @db.ObjectId
+  content    String
+  timestamp  DateTime
+  fromUser   User     @relation(name: "MessagesSent", fields: [fromUserId], references: [id])
+  fromUserId String   @db.ObjectId
+  toUser     User     @relation(name: "MessagesReceived", fields: [toUserId], references: [id])
+  toUserId   String   @db.ObjectId
+}
+
+enum UserType {
+  FREELANCER
+  CLIENT
+}
+
+enum OrderStatus {
+  PENDING
+  ACTIVE
+  COMPLETED
+}
