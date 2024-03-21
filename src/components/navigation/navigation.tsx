@@ -13,10 +13,10 @@ export default function Navigation() {
                 <div className={styles.navbar_container}>
                     <h1 className={styles.h1}>GigChain</h1>
                     <div className={styles.navbar_links_container}>
-                        <Link href="/findWork" className={styles.navbar_link}>
+                        <Link href="#" className={styles.navbar_link}>
                             Find Work
                         </Link>
-                        <Link href="/myJobs" className={styles.navbar_link}>
+                        <Link href="#" className={styles.navbar_link}>
                             My Jobs
                         </Link>
                     </div>

@@ -39,12 +39,12 @@ export default function RegisterationPage() {
       }),
     });
 
-    try {
+    
       const data = await response.json();
       console.log(data);
-    } catch (error) {
-      console.log("Error in parsing response");
-    }
+    //  catch (error) {
+      // console.log("Error in parsing response");
+    
     // console.log(response);
     if (response.ok) {
       console.log("User registered successfully");
