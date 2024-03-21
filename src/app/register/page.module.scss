@@ -1,4 +1,4 @@
-@use "../../../styles/_base.scss" as base;
+@use "../../../src/styles/_base.scss" as base;
 
 .signUp_wrapper {
   height: 100vh;
@@ -28,13 +28,11 @@
       .h3 {
         font: base.$h3;
         color: base.$black;
-
       }
 
       .h4 {
         font: base.$h4;
         color: base.$black;
-
       }
 
       .input_container {
@@ -43,6 +41,39 @@
         justify-content: center;
         align-items: center;
         gap: 15px;
+
+        .user_type_container {
+            background-color: #f4f4f9; /* Adjust the color to match your form */
+            padding: 15px;
+            border-radius: 8px;
+            width: 100%;
+          
+
+           label {
+            font-size: 16px;
+
+
+            
+            // font-family: base.$p_reg;
+            margin: 0;
+            color: #333333; /* Adjust the color to match your form's text */
+          }
+
+          label {
+            display: block;
+            // margin: 10px 0;
+            color: #333333; /* Adjust the color to match your form's text */
+          }
+
+          .freelancerInput[type="radio"], .clientInput[type="radio"] {
+            margin-right: 10px;
+          }
+
+          /* Style for when a radio button is checked */
+         input[type="radio"]:checked {
+            /* Add styles for checked state if necessary */
+          }
+        }
 
         .input {
           width: 450px;
@@ -100,7 +131,6 @@
       .welcome_text {
         font: base.$p_small;
         color: base.$black;
-
       }
 
       .signIn_link_container {

@@ -5,12 +5,12 @@ import Link from "next/link";
 import { useRouter } from "next/navigation";
 
 export default function RegisterationPage() {
-
   const router = useRouter();
-  
+
   const [name, setName] = React.useState("");
   const [email, setEmail] = React.useState("");
   const [password, setPassword] = React.useState("");
+  const [userType, setUserType] = React.useState("");
 
   const handleRegistration = async (
     event: React.FormEvent<HTMLFormElement>
@@ -21,29 +21,38 @@ export default function RegisterationPage() {
       name: name,
       email: email,
       password: password,
+      userType: userType,
     };
 
-    console.log(name);
+    console.log(name, email, password, userType);
 
     const response = await fetch("/register/api", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ name: name, email: email, password: password }),
+      body: JSON.stringify({
+        name: name,
+        email: email,
+        password: password,
+        userType: userType,
+      }),
     });
 
-    const data = await response.json();
-    console.log(data);
-
+    try {
+      const data = await response.json();
+      console.log(data);
+    } catch (error) {
+      console.log("Error in parsing response");
+    }
+    // console.log(response);
     if (response.ok) {
       console.log("User registered successfully");
-      router.push('/signIn'); 
-     
+      router.push("/signIn");
     } else if (response.status === 409) {
       console.error("User already exists");
     } else {
-      console.error("Failed to register user");
+      console.error("Failed to register user", response.body);
     }
   };
 
@@ -81,6 +90,35 @@ export default function RegisterationPage() {
                 name="name"
                 onChange={(event) => setName(event.target.value)}
               />
+
+              <div className={styles.user_type_container}>
+                <label className={styles.h4}>I am a:</label>
+                <br />
+                <input
+                  type="radio"
+                  className={styles.clientInput}
+                  name="userType"
+                  value="client"
+                  onChange={(event) => setUserType(event.target.value)}
+                />
+                <label htmlFor="client" className={styles.h4}>
+                  Client looking to hire
+                </label>
+                <br />
+
+                <input
+                  type="radio"
+                  className={styles.freelancerInput}
+                  name="userType"
+                  value="freelancer"
+                  onChange={(event) => setUserType(event.target.value)}
+                />
+                <label htmlFor="freelancer" className={styles.h4}>
+                  Freelancer looking for work
+                </label>
+                <br />
+              </div>
+
               <input
                 className={styles.input}
                 type="email"

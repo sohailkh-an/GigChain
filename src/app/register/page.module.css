@@ -38,6 +38,28 @@
   align-items: center;
   gap: 15px;
 }
+.signUp_wrapper .parent_cont_left .main_content_container .input_container .user_type_container {
+  background-color: #f4f4f9; /* Adjust the color to match your form */
+  padding: 15px;
+  border-radius: 8px;
+  width: 100%;
+  /* Style for when a radio button is checked */
+}
+.signUp_wrapper .parent_cont_left .main_content_container .input_container .user_type_container label {
+  font-size: 16px;
+  margin: 0;
+  color: #333333; /* Adjust the color to match your form's text */
+}
+.signUp_wrapper .parent_cont_left .main_content_container .input_container .user_type_container label {
+  display: block;
+  color: #333333; /* Adjust the color to match your form's text */
+}
+.signUp_wrapper .parent_cont_left .main_content_container .input_container .user_type_container .freelancerInput[type=radio], .signUp_wrapper .parent_cont_left .main_content_container .input_container .user_type_container .clientInput[type=radio] {
+  margin-right: 10px;
+}
+.signUp_wrapper .parent_cont_left .main_content_container .input_container .user_type_container input[type=radio]:checked {
+  /* Add styles for checked state if necessary */
+}
 .signUp_wrapper .parent_cont_left .main_content_container .input_container .input {
   width: 450px;
   height: 60px;
