@@ -2,7 +2,6 @@
 import React from "react";
 import Link from "next/link";
 import styles from "./styles/page.module.scss";
-import FeaturedServices from "@/app/lib/featuredServices/featuredServices";
 import FeaturedServicesSection from "@/components/featuredServicesSection/featuredServicesSection";
 import UserInfo from "@/components/userInfo/userInfo";
 import withAuth from "../api/withAuth";

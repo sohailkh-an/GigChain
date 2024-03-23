@@ -1,11 +1,10 @@
-import { mongo } from "mongoose";
 import NextAuth from "next-auth/next";
 import CredentialsProvider from "next-auth/providers/credentials";
 import { mongodb } from "../../../../../lib/mongodb";
 import User from "../../../../../models/user";
 import bcrypt from "bcrypt";
 
-export const authOptions = {
+const handler = NextAuth({
   providers: [
     CredentialsProvider({
       name: "credentials",
@@ -44,7 +43,6 @@ export const authOptions = {
     signOut: "/signOut",
     error: "/error",
   },
-};
+});
 
-const handler = NextAuth(authOptions);
 export { handler as GET, handler as POST };
