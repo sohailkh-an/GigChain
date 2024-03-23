@@ -4,14 +4,16 @@ import Link from "next/link";
 import styles from "./styles/page.module.scss";
 import FeaturedServices from "@/app/lib/featuredServices/featuredServices";
 import FeaturedServicesSection from "@/components/featuredServicesSection/featuredServicesSection";
+import UserInfo from "@/components/userInfo/userInfo";
+import withAuth from "../api/withAuth";
 
-export default function HomePage() {
+function HomePage() {
   return (
     <React.Fragment>
       <div className={styles.home_wrapper}>
         <div className={styles.hero_container}>
           <div className={styles.headings_container}>
-            <h5>Good Evening, Sohail</h5>
+            <UserInfo />
             <h1>
               Pick top talent at <br />
               your fingertips
@@ -36,3 +38,5 @@ export default function HomePage() {
     </React.Fragment>
   );
 }
+
+export default withAuth(HomePage);

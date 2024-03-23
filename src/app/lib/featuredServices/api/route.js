@@ -1,15 +1,16 @@
-import clientPromise from '../../../../../utils/mongodb';
+import {mongodb} from '../../../../../lib/mongodb';
 import { NextResponse } from 'next/server';
+import Service from '../../../../../models/service';
 
-export async function GET(req, res) {
+
+
+export async function GET() {
   
     try {
-      const client = await clientPromise;
-      const db = client.db("GigChain"); 
 
-      const featuredServices = await db.collection("Services")
-        .find({ isFeatured: true }) 
-        .toArray();
+      await mongodb();
+
+      const featuredServices = await Service.find({ isFeatured: true });
 
       return NextResponse.json(featuredServices);
     } catch (error) {

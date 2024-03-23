@@ -1,14 +1,13 @@
 import { NextResponse } from "next/server";
-import clientPromise from "../../../utils/mongodb";
+import {mongodb} from "../../../lib/mongodb";
+import Service from "../../../models/service";
 
 export async function POST(req, res) {
   try {
-    const client = await clientPromise;
-    const db = client.db("GigChain"); 
 
+    await mongodb();
 
-    //insert random user data to test the connection
-    await db.collection("Services").insertOne({
+    await Service.create({
       category: "Graphic Design",
       thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+2.png",
       serviceProvider: "Kamran Javaid",
@@ -19,7 +18,7 @@ export async function POST(req, res) {
     });
 
     //insert another user random data
-    await db.collection("Services").insertOne({
+    await Service.create({
       category: "Graphic Design",
       thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+76.png",
       serviceProvider: "Mehdi Hassan",
@@ -29,8 +28,7 @@ export async function POST(req, res) {
       isFeatured: true,
     });
 
-
-    await db.collection("Services").insertOne({
+    await Service.create({
       category: "Graphic Design",
       thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+1.png",
       serviceProvider: "Talha Qamar",
@@ -40,7 +38,7 @@ export async function POST(req, res) {
       isFeatured: true,
     });
 
-    await db.collection("Services").insertOne({
+    await Service.create({
       category: "Graphic Design",
       thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+78.png",
       serviceProvider: "Talha Qamar",
@@ -50,7 +48,7 @@ export async function POST(req, res) {
       isFeatured: true,
     });
 
-    await db.collection("Services").insertOne({
+    await Service.create({
       category: "Graphic Design",
       thumbnailUrl: "https://servicesthumbnailbucket.s3.ap-south-1.amazonaws.com/image+82.png",
       serviceProvider: "Talha Qamar",
@@ -60,11 +58,8 @@ export async function POST(req, res) {
       isFeatured: true,
     });
 
-    //fetch the user data
 
-    const data = await db.collection("Services")
-    .find({ isFeatured: true }) 
-    .toArray();
+    const data = await Service.find({ isFeatured: true });
 
     if (data.length > 0) {
       return new Response(JSON.stringify(data), {
@@ -81,8 +76,7 @@ export async function POST(req, res) {
     }
   } catch (error) {
     console.error("Failed to connect to MongoDB", error);
-    res
-      .status(500)
-      .json({ message: "Failed to connect to MongoDB", error: error.message });
+    return NextResponse.json({ error: "Failed to connect to MongoDB" });
+    
   }
 }

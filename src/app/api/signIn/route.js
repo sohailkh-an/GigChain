@@ -1,15 +1,15 @@
-import clientPromise from "../../../../utils/mongodb";
+import {mongodb} from "../../../../lib/mongodb";
 import { NextResponse } from "next/server";
 import bcrypt from "bcrypt";
+import User from "../../../../models/user";
 
 export async function POST(request) {
   try {
-    const client = await clientPromise;
-    const db = client.db("GigChain");
 
     const { email, password } = await request.json();
 
-    const user = await db.collection("users").findOne({ email });
+    await mongodb();
+    const user = await User.findOne({ email });
 
     if (!user) {
       return NextResponse.json(
